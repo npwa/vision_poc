@@ -1,0 +1,16 @@
+# Core
+torch>=2.1.0
+torchvision>=0.16.0
+transformers>=4.40.0
+accelerate>=0.27.0
+
+# Video / image handling
+opencv-python>=4.9.0
+pillow>=10.0.0
+numpy>=1.24.0
+
+# Install torch FIRST with the CUDA build matching your driver, e.g.:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+# Check your CUDA version with: nvidia-smi
+# Then install the rest:
+#   pip install -r requirements.txt
