@@ -32,12 +32,33 @@ from transformers import (
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
+def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
+    """
+    Geometric compliance check: is a 'hard hat' box positioned over this
+    person's head region? Used instead of asking the detector to understand
+    negated/compound prompts like "person without hard hat" directly, which
+    Grounding DINO handles unreliably (it grounds on token correlation, not
+    logical negation).
+    """
+    px0, py0, px1, py1 = person_box
+    head_y1 = py0 + head_fraction * (py1 - py0)
+    margin = x_margin * (px1 - px0)
+    head_x0, head_x1 = px0 - margin, px1 + margin
+    head_y0 = py0 - margin
+
+    for hx0, hy0, hx1, hy1 in hat_boxes:
+        hcx, hcy = (hx0 + hx1) / 2, (hy0 + hy1) / 2
+        if head_x0 <= hcx <= head_x1 and head_y0 <= hcy <= head_y1:
+            return True
+    return False
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--image", required=True)
     parser.add_argument(
         "--prompt",
-        default="person. hard hat. person without hard hat.",
+        default="person. hard hat.",
     )
     parser.add_argument("--box-threshold", type=float, default=0.35)
     parser.add_argument("--text-threshold", type=float, default=0.25)
@@ -68,13 +89,13 @@ def main():
     results = dino_processor.post_process_grounded_object_detection(
         outputs,
         inputs.input_ids,
-        box_threshold=args.box_threshold,
+        threshold=args.box_threshold,
         text_threshold=args.text_threshold,
         target_sizes=[image.size[::-1]],
     )[0]
 
     boxes = results["boxes"].cpu()
-    labels = results["labels"]
+    labels = results["text_labels"]
     scores = results["scores"].cpu()
 
     print(f"\nFound {len(boxes)} detections:")
@@ -101,13 +122,28 @@ def main():
     iou_scores = sam_outputs.iou_scores.cpu()
 
     # --- Draw and save ---
+    boxes_list = boxes.tolist()
+    hat_boxes = [b for b, l in zip(boxes_list, labels) if "hat" in l.lower()]
+
     draw_img = image.copy()
     draw = ImageDraw.Draw(draw_img)
-    for i, (box, label, score) in enumerate(zip(boxes, labels, scores)):
-        x0, y0, x1, y1 = box.tolist()
-        color = "red" if "without" in label.lower() or "no " in label.lower() else "lime"
+    for box, label, score in zip(boxes_list, labels, scores):
+        x0, y0, x1, y1 = box
+        l = label.lower()
+
+        if "person" in l:
+            compliant = head_has_hat(box, hat_boxes)
+            color = "lime" if compliant else "red"
+            text = f"person {'OK' if compliant else 'NO HARD HAT'} {score:.2f}"
+        elif "hat" in l:
+            color = "orange"
+            text = f"{label} {score:.2f}"
+        else:
+            color = "yellow"
+            text = f"{label} {score:.2f}"
+
         draw.rectangle([x0, y0, x1, y1], outline=color, width=3)
-        draw.text((x0, max(y0 - 12, 0)), f"{label} {score:.2f}", fill=color)
+        draw.text((x0, max(y0 - 12, 0)), text, fill=color)
 
     draw_img.save(args.output)
     print(f"\nSaved annotated image to {args.output}")

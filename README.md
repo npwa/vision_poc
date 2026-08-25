@@ -31,8 +31,8 @@ nvidia-smi
 python3 -m venv venv
 source venv/bin/activate
 
-# 3. Install torch matching your CUDA version, e.g. for CUDA 13.0:
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+# 3. Install torch matching your CUDA version, e.g. for CUDA 12.1:
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 
 # 4. Install the rest
 pip install -r requirements.txt
@@ -45,7 +45,7 @@ fine for the first test) and run:
 
 ```bash
 python quickstart_image_test.py --image test.jpg \
-    --prompt "person. hard hat."
+    --prompt "person. hard hat. person without hard hat."
 ```
 
 First run downloads the models (~1GB total) — after that, inference on a
@@ -81,3 +81,32 @@ video is short.
 Green boxes = compliant, red boxes = "without hard hat" (matched by the word
 "without" in the label — adjust the color logic in `draw_overlay()` if you
 change the prompt wording).
+
+## Why the prompt is "person. hard hat." not "person without hard hat."
+
+Grounding DINO grounds phrases to image regions via token-level correlation,
+not logical reasoning — it's weak at negation. Prompting for a compound
+concept like "person without hard hat" tends to produce garbled or
+duplicated labels (e.g. `"person person"`) rather than a clean detection.
+
+Both scripts instead detect "person" and "hard hat" as independent classes,
+then determine compliance themselves with a small geometric rule
+(`head_has_hat()`): is a detected hard hat positioned over a detected
+person's head region? Green box + "OK" if yes, red box + "NO HARD HAT" if
+no. This is a cleaner and more reliable pattern generally for compliance-
+style detection tasks — it's a real, well-known limitation of
+open-vocabulary grounding models, and building a reasoning layer around it
+rather than fighting the prompt is the right instinct.
+
+## Troubleshooting
+
+- **`TypeError: ...got an unexpected keyword argument 'box_threshold'`**: the
+  `transformers` library renamed this parameter to `threshold` in newer
+  releases, and the result dict's label field moved from `"labels"` to
+  `"text_labels"`. Both scripts here are updated for current `transformers`
+  (checked against 5.15.1). If you hit a similar signature mismatch on a
+  different call, run `python -c "import inspect, transformers; from
+  transformers import GroundingDinoProcessor;
+  print(inspect.signature(GroundingDinoProcessor.post_process_grounded_object_detection))"`
+  to see the exact signature your installed version expects — the
+  HF model card examples can lag behind released versions.

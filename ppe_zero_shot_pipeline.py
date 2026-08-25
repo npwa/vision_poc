@@ -42,6 +42,28 @@ from transformers import (
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
+def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
+    """
+    Geometric compliance check: is a 'hard hat' box positioned over this
+    person's head region? Used instead of asking the detector to understand
+    negated/compound prompts like "person without hard hat" directly, which
+    Grounding DINO handles unreliably (it grounds on token correlation, not
+    logical negation) — you'll get garbled or duplicate phrases like
+    "person person" if you try to prompt for the compound concept directly.
+    """
+    px0, py0, px1, py1 = person_box
+    head_y1 = py0 + head_fraction * (py1 - py0)
+    margin = x_margin * (px1 - px0)
+    head_x0, head_x1 = px0 - margin, px1 + margin
+    head_y0 = py0 - margin
+
+    for hx0, hy0, hx1, hy1 in hat_boxes:
+        hcx, hcy = (hx0 + hx1) / 2, (hy0 + hy1) / 2
+        if head_x0 <= hcx <= head_x1 and head_y0 <= hcy <= head_y1:
+            return True
+    return False
+
+
 def load_models(dino_id="IDEA-Research/grounding-dino-tiny", sam_id="facebook/sam-vit-base"):
     print(f"Device: {DEVICE}")
     print(f"Loading detector: {dino_id}")
@@ -63,12 +85,12 @@ def detect(frame_pil, prompt, dino_processor, dino_model, box_threshold, text_th
     results = dino_processor.post_process_grounded_object_detection(
         outputs,
         inputs.input_ids,
-        box_threshold=box_threshold,
+        threshold=box_threshold,
         text_threshold=text_threshold,
         target_sizes=[frame_pil.size[::-1]],
     )[0]
 
-    return results["boxes"].cpu().numpy(), list(results["labels"]), results["scores"].cpu().numpy()
+    return results["boxes"].cpu().numpy(), list(results["text_labels"]), results["scores"].cpu().numpy()
 
 
 def segment(frame_pil, boxes, sam_processor, sam_model):
@@ -95,15 +117,28 @@ def segment(frame_pil, boxes, sam_processor, sam_model):
 
 def draw_overlay(frame_bgr, boxes, labels, scores, masks):
     overlay = frame_bgr.copy()
+    boxes_list = boxes.tolist()
+    hat_boxes = [b for b, l in zip(boxes_list, labels) if "hat" in l.lower()]
+
     mask_iter = masks if masks else [None] * len(boxes)
     for box, label, score, mask in zip(boxes, labels, scores, mask_iter):
         x0, y0, x1, y1 = box.astype(int)
-        is_violation = "without" in label.lower() or "no " in label.lower()
-        color = (0, 0, 255) if is_violation else (0, 255, 0)  # BGR: red vs green
+        l = label.lower()
+
+        if "person" in l:
+            compliant = head_has_hat(box.tolist(), hat_boxes)
+            color = (0, 255, 0) if compliant else (0, 0, 255)  # BGR: green/red
+            text = f"person {'OK' if compliant else 'NO HARD HAT'} {score:.2f}"
+        elif "hat" in l:
+            color = (0, 165, 255)  # orange
+            text = f"{label} {score:.2f}"
+        else:
+            color = (0, 255, 255)  # yellow, unexpected label fallback
+            text = f"{label} {score:.2f}"
 
         cv2.rectangle(overlay, (x0, y0), (x1, y1), color, 2)
         cv2.putText(
-            overlay, f"{label} {score:.2f}", (x0, max(y0 - 8, 0)),
+            overlay, text, (x0, max(y0 - 8, 0)),
             cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2,
         )
         if mask is not None:
@@ -118,7 +153,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--video", required=True)
     parser.add_argument("--output", default="annotated.mp4")
-    parser.add_argument("--prompt", default="person. hard hat. person without hard hat.")
+    parser.add_argument("--prompt", default="person. hard hat.")
     parser.add_argument("--box-threshold", type=float, default=0.35)
     parser.add_argument("--text-threshold", type=float, default=0.25)
     parser.add_argument(
@@ -129,6 +164,7 @@ def main():
     parser.add_argument("--no-sam", action="store_true", help="Boxes only, skip segmentation masks")
     parser.add_argument("--dino-model", default="IDEA-Research/grounding-dino-tiny")
     parser.add_argument("--sam-model", default="facebook/sam-vit-base")
+    parser.add_argument("--verbose", action="store_true", help="Print each frame's detections to the console")
     args = parser.parse_args()
 
     dino_processor, dino_model, sam_processor, sam_model = load_models(
@@ -164,6 +200,13 @@ def main():
             )
             masks = [] if args.no_sam else segment(frame_pil, boxes, sam_processor, sam_model)
             last_boxes, last_labels, last_scores, last_masks = boxes, labels, scores, masks
+
+            if args.verbose:
+                if len(boxes) == 0:
+                    print(f"[frame {frame_idx}] no detections")
+                else:
+                    for label, score, box in zip(labels, scores, boxes):
+                        print(f"[frame {frame_idx}] {label!r}  score={score:.2f}  box={box.tolist()}")
 
         annotated = draw_overlay(frame_bgr, last_boxes, last_labels, last_scores, last_masks)
         writer.write(annotated)
