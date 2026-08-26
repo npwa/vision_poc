@@ -1,0 +1,130 @@
+[
+  {
+    "config": "grounding-dino-tiny + sam-vit-base",
+    "dino_model": "IDEA-Research/grounding-dino-tiny",
+    "sam_model": "facebook/sam-vit-base",
+    "load_time_s": 4.123636285003158,
+    "peak_vram_gb": 2.575918674468994,
+    "avg_fps": 3.597312639682266,
+    "videos": {
+      "20260824_174509.mp4": {
+        "verdict": "Person WITHOUT hard hat",
+        "detail": {
+          "confidence": 0.8305088242685253,
+          "agree_frames": 176,
+          "total_person_frames": 215
+        },
+        "n_frames": 229,
+        "elapsed_s": 65.73250775800261,
+        "fps": 3.483816574336012
+      },
+      "20260824_174640.mp4": {
+        "verdict": "Person WITH hard hat",
+        "detail": {
+          "confidence": 0.8754946239016674,
+          "agree_frames": 108,
+          "total_person_frames": 128
+        },
+        "n_frames": 201,
+        "elapsed_s": 54.166090460988926,
+        "fps": 3.71080870502852
+      }
+    }
+  },
+  {
+    "config": "grounding-dino-base + sam-vit-base",
+    "dino_model": "IDEA-Research/grounding-dino-base",
+    "sam_model": "facebook/sam-vit-base",
+    "load_time_s": 22.88051952100068,
+    "peak_vram_gb": 2.802680492401123,
+    "avg_fps": 3.2482929935383162,
+    "videos": {
+      "20260824_174509.mp4": {
+        "verdict": "Person WITHOUT hard hat",
+        "detail": {
+          "confidence": 0.61085437817706,
+          "agree_frames": 216,
+          "total_person_frames": 216
+        },
+        "n_frames": 229,
+        "elapsed_s": 74.06689104399993,
+        "fps": 3.0917998146291983
+      },
+      "20260824_174640.mp4": {
+        "verdict": "Person WITH hard hat",
+        "detail": {
+          "confidence": 0.6078441360286463,
+          "agree_frames": 107,
+          "total_person_frames": 125
+        },
+        "n_frames": 201,
+        "elapsed_s": 59.03454426200187,
+        "fps": 3.404786172447434
+      }
+    }
+  },
+  {
+    "config": "grounding-dino-tiny + sam-vit-large",
+    "dino_model": "IDEA-Research/grounding-dino-tiny",
+    "sam_model": "facebook/sam-vit-large",
+    "load_time_s": 26.251305432000663,
+    "peak_vram_gb": 3.9080004692077637,
+    "avg_fps": 2.4245595751831717,
+    "videos": {
+      "20260824_174509.mp4": {
+        "verdict": "Person WITHOUT hard hat",
+        "detail": {
+          "confidence": 0.8305088242685253,
+          "agree_frames": 176,
+          "total_person_frames": 215
+        },
+        "n_frames": 229,
+        "elapsed_s": 98.77487436099909,
+        "fps": 2.3184033539041367
+      },
+      "20260824_174640.mp4": {
+        "verdict": "Person WITH hard hat",
+        "detail": {
+          "confidence": 0.8754946239016674,
+          "agree_frames": 108,
+          "total_person_frames": 128
+        },
+        "n_frames": 201,
+        "elapsed_s": 79.42416935200163,
+        "fps": 2.5307157964622067
+      }
+    }
+  },
+  {
+    "config": "grounding-dino-base + sam-vit-large",
+    "dino_model": "IDEA-Research/grounding-dino-base",
+    "sam_model": "facebook/sam-vit-large",
+    "load_time_s": 4.395149922987912,
+    "peak_vram_gb": 4.137569904327393,
+    "avg_fps": 2.29212740669907,
+    "videos": {
+      "20260824_174509.mp4": {
+        "verdict": "Person WITHOUT hard hat",
+        "detail": {
+          "confidence": 0.61085437817706,
+          "agree_frames": 216,
+          "total_person_frames": 216
+        },
+        "n_frames": 229,
+        "elapsed_s": 109.47022511799878,
+        "fps": 2.091893021624457
+      },
+      "20260824_174640.mp4": {
+        "verdict": "Person WITH hard hat",
+        "detail": {
+          "confidence": 0.6078441360286463,
+          "agree_frames": 107,
+          "total_person_frames": 125
+        },
+        "n_frames": 201,
+        "elapsed_s": 80.646397591001,
+        "fps": 2.492361791773682
+      }
+    }
+  }
+]

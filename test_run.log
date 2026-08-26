@@ -1,0 +1,35 @@
+Device: cuda
+
+=== grounding-dino-tiny + sam-vit-base ===
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 12585.00it/s]
+Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 13546.57it/s]
+  loaded in 4.1s
+  20260824_174509.mp4: Person WITHOUT hard hat (conf=0.83, 3.5 fps)
+  20260824_174640.mp4: Person WITH hard hat (conf=0.88, 3.7 fps)
+  peak VRAM: 2.58 GB
+
+=== grounding-dino-base + sam-vit-base ===
+Loading weights:   0%|          | 0/1182 [00:00<?, ?it/s]Loading weights: 100%|██████████| 1182/1182 [00:00<00:00, 12490.31it/s]
+Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 13280.34it/s]
+  loaded in 22.9s
+  20260824_174509.mp4: Person WITHOUT hard hat (conf=0.61, 3.1 fps)
+  20260824_174640.mp4: Person WITH hard hat (conf=0.61, 3.4 fps)
+  peak VRAM: 2.80 GB
+
+=== grounding-dino-tiny + sam-vit-large ===
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 12358.82it/s]
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 14639.17it/s]
+  loaded in 26.3s
+  20260824_174509.mp4: Person WITHOUT hard hat (conf=0.83, 2.3 fps)
+  20260824_174640.mp4: Person WITH hard hat (conf=0.88, 2.5 fps)
+  peak VRAM: 3.91 GB
+
+=== grounding-dino-base + sam-vit-large ===
+Loading weights:   0%|          | 0/1182 [00:00<?, ?it/s]Loading weights: 100%|██████████| 1182/1182 [00:00<00:00, 12731.16it/s]
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 13856.44it/s]
+  loaded in 4.4s
+  20260824_174509.mp4: Person WITHOUT hard hat (conf=0.61, 2.1 fps)
+  20260824_174640.mp4: Person WITH hard hat (conf=0.61, 2.5 fps)
+  peak VRAM: 4.14 GB
+
+Wrote test_results.json

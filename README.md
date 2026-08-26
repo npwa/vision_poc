@@ -45,7 +45,7 @@ fine for the first test) and run:
 
 ```bash
 python quickstart_image_test.py --image test.jpg \
-    --prompt "person. hard hat. person without hard hat."
+    --prompt "person. hard hat."
 ```
 
 First run downloads the models (~1GB total) — after that, inference on a
@@ -54,10 +54,9 @@ boxes and labels. If nothing is detected, lower `--box-threshold` (default
 0.35) or simplify the prompt.
 
 **Prompt format matters**: Grounding DINO wants lowercase phrases separated
-by periods, each phrase being a separate thing to look for. `"person."` and
-`"person without hard hat."` are two different classes it'll look for
-independently — it doesn't reason about the relationship between them, so
-phrase it as the literal visual thing you want it to find.
+by periods, each phrase being a separate thing to look for — keep phrases
+to simple, literal visual objects (see "Why the prompt is..." below for why
+compound/negated phrases don't work well here).
 
 ## Step 2: full pipeline on your test video
 
@@ -69,7 +68,7 @@ a connected webcam) and run:
 python ppe_zero_shot_pipeline.py \
     --video worker_test.mp4 \
     --output annotated.mp4 \
-    --prompt "person. hard hat. person without hard hat." \
+    --prompt "person. hard hat." \
     --every-n-frames 3
 ```
 
@@ -78,9 +77,13 @@ result in between — much faster for a first pass, and fine for a demo video.
 Drop to `1` for a fully per-frame pass once you're tuning results, or if the
 video is short.
 
-Green boxes = compliant, red boxes = "without hard hat" (matched by the word
-"without" in the label — adjust the color logic in `draw_overlay()` if you
-change the prompt wording).
+Add `--verbose` to print each frame's raw detections (label, score, box) to
+the console as it processes — useful for tuning the prompt or threshold
+without waiting to review the output video.
+
+Green boxes = compliant ("person OK"), red boxes = "person NO HARD HAT",
+orange boxes = the raw hard-hat detections themselves. Compliance is
+computed geometrically, not from the label text — see below.
 
 ## Why the prompt is "person. hard hat." not "person without hard hat."
 
@@ -110,3 +113,12 @@ rather than fighting the prompt is the right instinct.
   print(inspect.signature(GroundingDinoProcessor.post_process_grounded_object_detection))"`
   to see the exact signature your installed version expects — the
   HF model card examples can lag behind released versions.
+
+- **"unauthenticated requests to the HF Hub" warning**: harmless — models
+  are already cached locally after the first run, but `from_pretrained()`
+  still checks the Hub for updates by default. To force a fully offline run
+  (no network calls, fails loudly if something isn't cached) once you've
+  downloaded everything once:
+  ```bash
+  export HF_HUB_OFFLINE=1
+  ```
