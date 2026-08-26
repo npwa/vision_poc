@@ -40,13 +40,17 @@ pip install -r requirements.txt
 
 ## Step 1: sanity-check on a single image
 
-Grab any photo with people in it (a stock photo of a construction site works
-fine for the first test) and run:
+Two self-filmed sample stills are included so you can run this immediately
+without sourcing your own photo: `test_image.jpg` (hard hat on) and
+`test_image2.jpg` (no hard hat) — both frames grabbed from this repo's own
+test videos, so there's no third-party image-licensing question. Run:
 
 ```bash
-python quickstart_image_test.py --image test.jpg \
+python quickstart_image_test.py --image test_image.jpg \
     --prompt "person. hard hat."
 ```
+
+Or point `--image` at any photo of your own with people in it.
 
 First run downloads the models (~1GB total) — after that, inference on a
 single image takes a few seconds on the 3080. Check `annotated_test.png` for

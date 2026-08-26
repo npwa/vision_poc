@@ -25,6 +25,8 @@ Usage:
 
 import argparse
 import json
+import os
+import subprocess
 import time
 
 import cv2
@@ -67,6 +69,18 @@ CONFIGS = [
     {"name": "grounding-dino-tiny + sam-vit-large", "dino": "IDEA-Research/grounding-dino-tiny", "sam": "facebook/sam-vit-large"},
     {"name": "grounding-dino-base + sam-vit-large", "dino": "IDEA-Research/grounding-dino-base", "sam": "facebook/sam-vit-large"},
 ]
+
+
+def ensure_test_media():
+    """
+    Fetch VIDEOS from almassy.com via fetch_test_media.sh if they aren't
+    already present in the current directory. Kept as a shell script rather
+    than inline Python so the download logic (curl retry, per-file skip) is
+    reusable outside this script and stays simple to inspect/audit -- it's
+    fetching test media over the network before anything else runs.
+    """
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fetch_test_media.sh")
+    subprocess.run(["bash", script], check=True)
 
 
 def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
@@ -222,6 +236,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="test_results.json")
     args = parser.parse_args()
+
+    ensure_test_media()
 
     print(f"Device: {DEVICE}")
     if DEVICE == "cpu":
