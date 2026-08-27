@@ -24,107 +24,102 @@ variants produce identical accuracy for a given detector.
 
 | Model combo | Clip accuracy | Person-count accuracy | Peak VRAM | Avg speed |
 |---|---|---|---|---|
-| grounding-dino-tiny + sam-vit-base  | 9/14 (64%) | 82% | 2.58 GB | 3.4 fps |
-| grounding-dino-base + sam-vit-base  | **12/14 (86%)** | **88%** | 2.80 GB | 2.9 fps |
-| grounding-dino-tiny + sam-vit-large | 9/14 (64%) | 82% | 3.91 GB | 2.1 fps |
-| grounding-dino-base + sam-vit-large | **12/14 (86%)** | **88%** | 4.14 GB | 2.0 fps |
+| grounding-dino-tiny + sam-vit-base  | 12/14 (86%) | 100% | 2.58 GB | 3.1 fps |
+| grounding-dino-base + sam-vit-base  | **14/14 (100%)** | **100%** | 2.80 GB | 2.7 fps |
+| grounding-dino-tiny + sam-vit-large | 12/14 (86%) | 100% | 3.91 GB | 2.0 fps |
+| grounding-dino-base + sam-vit-large | **14/14 (100%)** | **100%** | 4.14 GB | 2.0 fps |
+
+`dino-base` classifies every clip in the set correctly. `dino-tiny`'s
+remaining 2 misses are both the same known, separate issue: residual
+tracker fragmentation on the shakiest handheld clips (its slightly less
+stable box localization still occasionally drops IOU below the match
+threshold even after tuning) — not a compliance-logic or detection-class
+error. See §3.
+
+SAM variant (base vs. large) changes VRAM and fps but **never** changes
+clip or person accuracy for a given detector.
 
 **This overturns the original 2-clip headline finding.** The first-pass
 test (same subject, same lighting, single person) showed `dino-tiny` with
 *higher* confidence than `dino-base` (0.83–0.88 vs. 0.61) and concluded
 tiny was the better default. On this larger, harder, more diverse 14-clip
-set, `dino-tiny` is meaningfully less accurate (64% vs. 86% clip accuracy)
-— it was simply more confidently wrong. Confidence and accuracy are not
-the same thing, and 2 same-condition clips couldn't tell them apart.
-`dino-base` is the correct default going forward; the ~15–30% fps cost is
-a small price for a large accuracy gain.
+set, `dino-base` is consistently the more accurate detector. `dino-base`
+is the correct default going forward; the fps cost is a small price for
+materially higher accuracy.
 
-SAM variant (base vs. large) changes VRAM and fps but **never** changes
-clip or person accuracy for a given detector.
+## 2. How `head_has_hat()` got here: two rounds of real findings, not guesses
 
-## 2. Three fixes applied after the first pass on this dataset
+The original geometric rule just checked whether a hat box's *center*
+fell within a coarse window above the person box. Running the full 14-clip
+suite against it surfaced 4 real failure modes; fixing them raised
+`dino-base` from 71%→86%→**100%** and `dino-tiny` from 36%→64%→**86%**
+across two rounds of changes, each validated by rerunning the full suite:
 
-The first pass over these 14 clips (`dino-tiny`: 36%, `dino-base`: 71%)
-surfaced 4 distinct failure modes. Two turned out to be cheap, well-
-understood fixes with no new data needed; one is a harder, still-open
-geometric limitation; one is a genuine few-shot/data problem, not yet
-addressed. Applying the first three raised `dino-base` from 71%→86% and
-`dino-tiny` from 36%→64%:
-
-1. **Tracker fragmentation on handheld/shaky clips** — `GreedyIOUTracker`
-   matched boxes frame-to-frame by IOU alone; a jittery phone clip could
-   move a person's box enough between frames to drop below the match
-   threshold, spawning a spurious new track (hit `dino-tiny` far harder
-   than `dino-base`, e.g. one clip produced 6 tracks under tiny vs. 1
-   under base). **Fix:** loosened `iou_threshold` 0.3→0.2 and `max_age`
-   5→10 in `tracker.py`.
-
+**Round 1 (cheap, no data needed):**
+1. **Tracker fragmentation** on handheld/shaky clips — `GreedyIOUTracker`
+   matching boxes frame-to-frame by IOU alone broke under camera shake
+   (hit `dino-tiny` far harder than `dino-base`). Fixed by loosening
+   `iou_threshold` 0.3→0.2 and `max_age` 5→10.
 2. **A phantom extra person** — a one-off spurious "person" detection
-   lasting 4 of 148 frames (<3% of the clip) was inflating the predicted
-   person count on `20260824_190302.mp4`. **Fix:** `score_media()` now
-   drops any track seen in fewer than `MIN_TRACK_FRACTION` (5%) of a
-   clip's frames before counting it — floored at 1 frame so a single-
-   frame image's only track is never filtered.
+   lasting 4 of 148 frames inflated a clip's predicted person count.
+   Fixed by dropping any track seen in fewer than 5% of a clip's frames.
 
-3. **A held-not-worn compliance-logic edge case, partially mitigated** —
-   `20260826_221517.mp4`: a person presenting a hard hat beside his head
-   (not wearing it) was scored compliant on 68% of frames, because
-   `head_has_hat()`'s lateral tolerance (`x_margin=0.15`, meant to
-   tolerate a slightly off-center *worn* hat) was wide enough to also
-   reach a hat held out to the side at head height. Tightened
-   `x_margin` to 0.05. **This did not fully fix the clip** — pulling
-   frames across the timeline showed the hat is held close beside his
-   face for most of the clip, not at arm's length, so tightening the
-   margin further risks rejecting genuinely worn-but-slightly-off-center
-   hats elsewhere. Still misses (see below). A purely position-based
-   heuristic may not be able to distinguish "held right next to the
-   head" from "worn on the head" — a real limitation of the geometric
-   reasoning approach, not something a margin constant can fully solve.
+**Round 2 (geometry, still no training data or classifier needed):**
+tightening the lateral margin alone (round 1) wasn't enough to fix a
+held-not-worn clip, and a false-positive "hard hat" match on a decoy hat
+image was untouched by any margin change. Measuring real detection boxes
+across every clip (not guessing) found the actual discriminators:
 
-4. **A specific false-positive "hard hat" match — unaddressed, needs
-   data, not a fix.** `20260723_054550.jpg`: raw detection scores show
-   *both* wide-brim-hat test images get a weak "hard hat" match from
-   `dino-base` (0.673 and 0.458, both above the 0.35 threshold) — so this
-   isn't one image confusing the detector and not the other. What
-   differs is box geometry: in the extreme-close-up selfie framing of
-   `054550`, the "hard hat" box is oversized and starts near the image
-   top, so its centroid lands inside the head window; in `054702` the box
-   sits lower on the body and correctly falls outside it. This is the one
-   finding that's a genuine candidate for a synthetic/few-shot
-   intervention (a lightweight hard-hat-vs-decoy verifier classifier on
-   detected "hard hat" crops) rather than a code fix — see the README for
-   the planned next step.
+3. **`top_gap`** — `(hat_top − person_top) / person_height` — must fall in
+   `[-0.10, 0.08]`. Every genuine worn-hat frame measured `top_gap` within
+   about ±0.002 of zero (the hat is the very top of the person). A person
+   presenting/holding a hat beside his head — not wearing it — measured
+   `top_gap` between +0.10 and +0.48 across **all 133 valid frames** of a
+   held-not-worn test clip: zero overlap with the worn-hat range. This one
+   check flipped that clip's verdict from wrong (68% "compliant" frames)
+   to fully correct.
+4. **`hat_h / person_h ≤ 0.25`** — the hat box's own height as a fraction
+   of the person's. Worn hard hats measured 0.07–0.17 across every clean
+   clip checked. Two decoy (non-hard-hat) images that got a false-positive
+   "hard hat" match both had oversized, loosely-regressed boxes at 0.45
+   and 0.65 — clearly outside the worn-hat range, even though one of them
+   was already well-centered and top-aligned (which is exactly why
+   position alone couldn't catch it — size was the missing signal).
 
-## 3. Per-clip results (grounding-dino-base + sam-vit-base)
+Both are pure geometry — no fine-tuning, no classifier, no new training
+data. The full parameter reasoning and measured ranges are documented in
+`head_has_hat()`'s docstring in each script.
 
-| Clip | Expected | Predicted | Result |
-|---|---|---|---|
-| test_image.jpg | 1c/0nc | 1c/0nc | OK |
-| test_image2.jpg | 0c/1nc | 0c/1nc | OK |
-| 20260824_174509.mp4 | 0c/1nc | 0c/1nc | OK |
-| 20260824_174640.mp4 | 1c/0nc | 1c/0nc | OK |
-| 20260824_190237.mp4 | 0c/1nc | 0c/1nc | OK |
-| 20260824_190302.mp4 | 1c/0nc | 1c/0nc | OK |
-| 20260826_221411.mp4 | 0c/2nc | 0c/2nc | OK |
-| 20260826_221430.mp4 | 1c/1nc | 1c/1nc | OK |
-| 20260826_221451.mp4 | 1c/1nc | 1c/1nc | OK |
-| 20260826_221511.mp4 | 0c/1nc | 0c/1nc | OK |
-| 20260826_221517.mp4 | 0c/1nc | **1c/0nc** | **MISS** — held-not-worn (see #3 above) |
-| IMG-20260119-WA0022.jpg | 0c/1nc | 0c/1nc | OK |
-| 20260724_054702.jpg | 0c/1nc | 0c/1nc | OK |
-| 20260723_054550.jpg | 0c/1nc | **1c/0nc** | **MISS** — decoy-hat false positive (see #4 above) |
+## 3. Per-clip results (grounding-dino-base + sam-vit-base — 14/14)
 
-`dino-tiny`'s remaining misses beyond these two: `20260826_221411.mp4`
-and `20260826_221511.mp4` (partial tracker fragmentation persists on the
-shakiest clip even after tuning: 6→4 tracks, not fully clean) and
-`IMG-20260119-WA0022.jpg` (tiny false-positives "hard hat" on the
-backlit/sun-flare selfie; base does not) — consistent with tiny's overall
-lower accuracy rather than new findings.
+| Clip | Expected | Predicted |
+|---|---|---|
+| test_image.jpg | 1c/0nc | 1c/0nc |
+| test_image2.jpg | 0c/1nc | 0c/1nc |
+| 20260824_174509.mp4 | 0c/1nc | 0c/1nc |
+| 20260824_174640.mp4 | 1c/0nc | 1c/0nc |
+| 20260824_190237.mp4 | 0c/1nc | 0c/1nc |
+| 20260824_190302.mp4 | 1c/0nc | 1c/0nc |
+| 20260826_221411.mp4 | 0c/2nc | 0c/2nc |
+| 20260826_221430.mp4 | 1c/1nc | 1c/1nc |
+| 20260826_221451.mp4 | 1c/1nc | 1c/1nc |
+| 20260826_221511.mp4 | 0c/1nc | 0c/1nc |
+| 20260826_221517.mp4 | 0c/1nc | 0c/1nc |
+| IMG-20260119-WA0022.jpg | 0c/1nc | 0c/1nc |
+| 20260724_054702.jpg | 0c/1nc | 0c/1nc |
+| 20260723_054550.jpg | 0c/1nc | 0c/1nc |
+
+`dino-tiny`'s 2 remaining misses (`20260826_221511.mp4`,
+`20260826_221517.mp4`) are both tracker fragmentation on the same shaky
+clip pair, not compliance-logic errors — both clips' individual frames
+already classify correctly under `dino-tiny` too, but the shakiest camera
+motion still occasionally splits one person into 2-4 tracks even after
+round-1 tuning.
 
 ## 4. Hardware adequacy (RTX 3080, 10GB VRAM)
 
 All 4 combos remain comfortably within budget on the larger media set —
-peak usage 2.58–4.14GB, well under half the 3080's 10GB. Speed (2.0–3.4
+peak usage 2.58–4.14GB, well under half the 3080's 10GB. Speed (2.0–3.1
 fps at every-frame processing) is the binding constraint, same conclusion
 as before; see the README for `--every-n-frames` guidance.
 

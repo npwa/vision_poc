@@ -15,26 +15,26 @@ Found 20260723_054550.jpg, skipping download.
 Device: cuda
 
 === grounding-dino-tiny + sam-vit-base ===
-Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 12928.53it/s]
-Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 12704.37it/s]
-  loaded in 0.8s
-  20260723_054550.jpg: MISS predicted=1c/0nc expected=0c/1nc (1.4 fps)
-  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (3.0 fps)
-  20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (3.7 fps)
-  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (3.9 fps)
-  20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (3.6 fps)
-  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (3.6 fps)
-  20260826_221411.mp4: MISS predicted=1c/1nc expected=0c/2nc (3.5 fps)
-  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (3.6 fps)
-  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (3.6 fps)
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 10687.74it/s]
+Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 11215.58it/s]
+  loaded in 1.0s
+  20260723_054550.jpg: OK predicted=0c/1nc expected=0c/1nc (1.3 fps)
+  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (0.7 fps)
+  20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (3.6 fps)
+  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (3.8 fps)
+  20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (3.5 fps)
+  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (3.5 fps)
+  20260826_221411.mp4: OK predicted=0c/2nc expected=0c/2nc (3.4 fps)
+  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (3.5 fps)
+  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (3.5 fps)
   20260826_221511.mp4: MISS predicted=0c/4nc expected=0c/1nc (3.5 fps)
-  20260826_221517.mp4: MISS predicted=1c/1nc expected=0c/1nc (3.6 fps)
-  IMG-20260119-WA0022.jpg: MISS predicted=1c/0nc expected=0c/1nc (2.6 fps)
-  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (3.7 fps)
-  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (3.7 fps)
-  peak VRAM: 2.58 GB | clip accuracy: 9/14 (64%) | person-count accuracy: 82%
+  20260826_221517.mp4: MISS predicted=0c/2nc expected=0c/1nc (3.4 fps)
+  IMG-20260119-WA0022.jpg: OK predicted=0c/1nc expected=0c/1nc (2.3 fps)
+  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (3.4 fps)
+  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (3.5 fps)
+  peak VRAM: 2.58 GB | clip accuracy: 12/14 (86%) | person-count accuracy: 100%
 
-Wrote /tmp/out_tiny_base.json
+Wrote /tmp/out2_tiny_base.json
 
 Found 20260824_174509.mp4, skipping download.
 Found 20260824_174640.mp4, skipping download.
@@ -53,26 +53,26 @@ Found 20260723_054550.jpg, skipping download.
 Device: cuda
 
 === grounding-dino-base + sam-vit-base ===
-Loading weights:   0%|          | 0/1182 [00:00<?, ?it/s]Loading weights: 100%|██████████| 1182/1182 [00:00<00:00, 12424.45it/s]
-Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 13468.99it/s]
-  loaded in 0.9s
-  20260723_054550.jpg: MISS predicted=1c/0nc expected=0c/1nc (1.3 fps)
-  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (2.7 fps)
-  20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (3.1 fps)
-  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (3.4 fps)
-  20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (3.0 fps)
-  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (3.5 fps)
-  20260826_221411.mp4: OK predicted=0c/2nc expected=0c/2nc (3.0 fps)
-  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (3.0 fps)
-  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (3.0 fps)
-  20260826_221511.mp4: OK predicted=0c/1nc expected=0c/1nc (3.0 fps)
-  20260826_221517.mp4: MISS predicted=1c/0nc expected=0c/1nc (3.0 fps)
+Loading weights:   0%|          | 0/1182 [00:00<?, ?it/s]Loading weights:  93%|█████████▎| 1101/1182 [00:00<00:00, 10993.31it/s]Loading weights: 100%|██████████| 1182/1182 [00:00<00:00, 11100.59it/s]
+Loading weights:   0%|          | 0/314 [00:00<?, ?it/s]Loading weights: 100%|██████████| 314/314 [00:00<00:00, 11366.19it/s]
+  loaded in 1.1s
+  20260723_054550.jpg: OK predicted=0c/1nc expected=0c/1nc (1.2 fps)
+  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (2.4 fps)
+  20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (3.0 fps)
+  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (3.3 fps)
+  20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (2.7 fps)
+  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (3.1 fps)
+  20260826_221411.mp4: OK predicted=0c/2nc expected=0c/2nc (2.7 fps)
+  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (2.7 fps)
+  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (2.7 fps)
+  20260826_221511.mp4: OK predicted=0c/1nc expected=0c/1nc (2.8 fps)
+  20260826_221517.mp4: OK predicted=0c/1nc expected=0c/1nc (2.8 fps)
   IMG-20260119-WA0022.jpg: OK predicted=0c/1nc expected=0c/1nc (2.2 fps)
-  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (3.1 fps)
-  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (3.1 fps)
-  peak VRAM: 2.80 GB | clip accuracy: 12/14 (86%) | person-count accuracy: 88%
+  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (3.0 fps)
+  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (2.8 fps)
+  peak VRAM: 2.80 GB | clip accuracy: 14/14 (100%) | person-count accuracy: 100%
 
-Wrote /tmp/out_base_base.json
+Wrote /tmp/out2_base_base.json
 
 Found 20260824_174509.mp4, skipping download.
 Found 20260824_174640.mp4, skipping download.
@@ -91,43 +91,61 @@ Found 20260723_054550.jpg, skipping download.
 Device: cuda
 
 === grounding-dino-tiny + sam-vit-large ===
-Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 12466.43it/s]
-Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 12648.07it/s]
-  loaded in 1.0s
-  20260723_054550.jpg: MISS predicted=1c/0nc expected=0c/1nc (1.2 fps)
-  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (2.1 fps)
+Loading weights:   0%|          | 0/978 [00:00<?, ?it/s]Loading weights:  75%|███████▍  | 731/978 [00:00<00:00, 7306.17it/s]Loading weights: 100%|██████████| 978/978 [00:00<00:00, 7473.58it/s]
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 12105.28it/s]
+  loaded in 1.3s
+  20260723_054550.jpg: OK predicted=0c/1nc expected=0c/1nc (1.1 fps)
+  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (2.0 fps)
   20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (2.3 fps)
-  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (2.6 fps)
+  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (2.5 fps)
   20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (2.2 fps)
   20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (2.2 fps)
-  20260826_221411.mp4: MISS predicted=1c/1nc expected=0c/2nc (2.2 fps)
-  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (2.3 fps)
-  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (2.3 fps)
+  20260826_221411.mp4: OK predicted=0c/2nc expected=0c/2nc (2.2 fps)
+  20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (2.2 fps)
+  20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (2.2 fps)
   20260826_221511.mp4: MISS predicted=0c/4nc expected=0c/1nc (2.2 fps)
-  20260826_221517.mp4: MISS predicted=1c/1nc expected=0c/1nc (2.2 fps)
-  IMG-20260119-WA0022.jpg: MISS predicted=1c/0nc expected=0c/1nc (1.7 fps)
-  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (2.2 fps)
-  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (2.2 fps)
-  peak VRAM: 3.91 GB | clip accuracy: 9/14 (64%) | person-count accuracy: 82%
+  20260826_221517.mp4: MISS predicted=0c/2nc expected=0c/1nc (2.2 fps)
+  IMG-20260119-WA0022.jpg: OK predicted=0c/1nc expected=0c/1nc (0.4 fps)
+  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (2.3 fps)
+  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (2.3 fps)
+  peak VRAM: 3.91 GB | clip accuracy: 12/14 (86%) | person-count accuracy: 100%
 
-Wrote /tmp/out_tiny_large.json
+Wrote /tmp/out2_tiny_large.json
 
-loaded in 1.2s
-  20260723_054550.jpg: MISS predicted=1c/0nc expected=0c/1nc (1.1 fps)
-  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (1.9 fps)
+Found 20260824_174509.mp4, skipping download.
+Found 20260824_174640.mp4, skipping download.
+Found test_image.jpg, skipping download.
+Found test_image2.jpg, skipping download.
+Found 20260824_190302.mp4, skipping download.
+Found 20260824_190237.mp4, skipping download.
+Found 20260826_221411.mp4, skipping download.
+Found 20260826_221430.mp4, skipping download.
+Found 20260826_221451.mp4, skipping download.
+Found 20260826_221511.mp4, skipping download.
+Found 20260826_221517.mp4, skipping download.
+Found IMG-20260119-WA0022.jpg, skipping download.
+Found 20260724_054702.jpg, skipping download.
+Found 20260723_054550.jpg, skipping download.
+Device: cuda
+
+=== grounding-dino-base + sam-vit-large ===
+Loading weights:   0%|          | 0/1182 [00:00<?, ?it/s]Loading weights:  93%|█████████▎| 1096/1182 [00:00<00:00, 10932.07it/s]Loading weights: 100%|██████████| 1182/1182 [00:00<00:00, 10934.45it/s]
+Loading weights:   0%|          | 0/482 [00:00<?, ?it/s]Loading weights: 100%|██████████| 482/482 [00:00<00:00, 10115.66it/s]
+  loaded in 1.4s
+  20260723_054550.jpg: OK predicted=0c/1nc expected=0c/1nc (1.0 fps)
+  20260724_054702.jpg: OK predicted=0c/1nc expected=0c/1nc (1.8 fps)
   20260824_174509.mp4: OK predicted=0c/1nc expected=0c/1nc (2.1 fps)
-  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (2.5 fps)
+  20260824_174640.mp4: OK predicted=1c/0nc expected=1c/0nc (2.4 fps)
   20260824_190237.mp4: OK predicted=0c/1nc expected=0c/1nc (2.0 fps)
-  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (2.7 fps)
+  20260824_190302.mp4: OK predicted=1c/0nc expected=1c/0nc (2.6 fps)
   20260826_221411.mp4: OK predicted=0c/2nc expected=0c/2nc (2.0 fps)
   20260826_221430.mp4: OK predicted=1c/1nc expected=1c/1nc (2.0 fps)
   20260826_221451.mp4: OK predicted=1c/1nc expected=1c/1nc (2.0 fps)
   20260826_221511.mp4: OK predicted=0c/1nc expected=0c/1nc (2.0 fps)
-  20260826_221517.mp4: MISS predicted=1c/0nc expected=0c/1nc (2.0 fps)
-  IMG-20260119-WA0022.jpg: OK predicted=0c/1nc expected=0c/1nc (1.7 fps)
-  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (2.1 fps)
-  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (2.1 fps)
-peak VRAM: 4.14 GB | clip accuracy: 12/14 (86%) | person accuracy: 88%
-Wrote /tmp/base_large_result.json
+  20260826_221517.mp4: OK predicted=0c/1nc expected=0c/1nc (2.0 fps)
+  IMG-20260119-WA0022.jpg: OK predicted=0c/1nc expected=0c/1nc (1.6 fps)
+  test_image.jpg: OK predicted=1c/0nc expected=1c/0nc (2.0 fps)
+  test_image2.jpg: OK predicted=0c/1nc expected=0c/1nc (2.0 fps)
+  peak VRAM: 4.14 GB | clip accuracy: 14/14 (100%) | person-count accuracy: 100%
 
-[exited with code 0]
+Wrote /tmp/out2_base_large.json

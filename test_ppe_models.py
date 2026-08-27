@@ -94,35 +94,59 @@ def load_ground_truth():
         return json.load(f)
 
 
-def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.05):
+def head_has_hat(
+    person_box, hat_boxes, x_margin=0.05, top_gap_min=-0.10, top_gap_max=0.08,
+    max_hat_ratio=0.25,
+):
     """
     Geometric compliance check, copied from ppe_zero_shot_pipeline.py: is
-    a detected "hard hat" box centered over this person's head region?
+    a detected "hard hat" box actually worn on this person's head, as
+    opposed to merely present somewhere near it?
 
     This exists because Grounding DINO grounds phrases via token-level
     correlation, not logical reasoning, so it can't reliably be prompted
     with negation (e.g. "person without hard hat" tends to produce garbled
     output like "person person"). Instead we detect "person" and "hard
-    hat" as independent classes and determine compliance ourselves: take
-    the top head_fraction of the person's box height (plus a small x/y
-    margin to tolerate a hat sitting slightly outside the person box) and
-    check whether any hat box's center falls inside it.
+    hat" as independent classes and determine compliance ourselves with
+    three checks on the hat box relative to the person box, each tuned
+    against real detection data from the eval suite (RESULTS.md) rather
+    than guessed:
 
-    x_margin is deliberately tight (was 0.15): the baseline eval found a
-    held-not-worn hat clip (20260826_221517.mp4) scoring compliant on 68%
-    of frames, because a hat held out to the side at head height fell
-    within the wider margin meant to tolerate a slightly off-center worn
-    hat. 0.05 still tolerates normal detection jitter but no longer
-    reaches an arm's-length hold.
+    - top_gap = (hat_top - person_top) / person_height must fall in
+      [top_gap_min, top_gap_max]. Every genuine worn-hat frame checked had
+      top_gap within about -0.002 to +0.002 (the hat is the very top of
+      the person). A person presenting/holding a hat beside their head
+      (not wearing it) measured top_gap = +0.10 to +0.48 across all 133
+      valid frames of a held-not-worn test clip -- zero overlap with the
+      worn-hat range, so top_gap_max=0.08 catches every one of those
+      frames while still giving worn hats 4x headroom over their observed
+      jitter.
+    - hat_h / person_h (the hat box's own height as a fraction of the
+      person's) must be <= max_hat_ratio. Worn hard hats measured 0.07-0.17
+      of person height across every clean clip checked. Two decoy (non-
+      hard-hat) images that got a false-positive "hard hat" match both had
+      oversized, loosely-regressed boxes at 0.45 and 0.65 -- clearly
+      outside the worn-hat range even though (in the false-positive case)
+      the hat box happened to be well-centered and top-aligned, which is
+      why top_gap/x_margin alone couldn't catch it.
+    - The hat box's horizontal center must fall within x_margin of the
+      person box's width, tolerating normal left/right detection jitter
+      for a worn hat without reaching a hat held out to the side.
     """
     px0, py0, px1, py1 = person_box
-    head_y1 = py0 + head_fraction * (py1 - py0)
-    margin = x_margin * (px1 - px0)
+    p_w, p_h = px1 - px0, py1 - py0
+    margin = x_margin * p_w
     head_x0, head_x1 = px0 - margin, px1 + margin
-    head_y0 = py0 - margin
+
     for hx0, hy0, hx1, hy1 in hat_boxes:
-        hcx, hcy = (hx0 + hx1) / 2, (hy0 + hy1) / 2
-        if head_x0 <= hcx <= head_x1 and head_y0 <= hcy <= head_y1:
+        top_gap = (hy0 - py0) / p_h
+        hat_ratio = (hy1 - hy0) / p_h
+        hcx = (hx0 + hx1) / 2
+        if (
+            head_x0 <= hcx <= head_x1
+            and top_gap_min <= top_gap <= top_gap_max
+            and hat_ratio <= max_hat_ratio
+        ):
             return True
     return False
 

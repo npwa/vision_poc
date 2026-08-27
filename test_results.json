@@ -3,29 +3,29 @@
     "config": "grounding-dino-tiny + sam-vit-base",
     "dino_model": "IDEA-Research/grounding-dino-tiny",
     "sam_model": "facebook/sam-vit-base",
-    "load_time_s": 0.8210430189792532,
+    "load_time_s": 0.9705829769955017,
     "peak_vram_gb": 2.575918674468994,
-    "avg_fps": 3.3457857203266004,
-    "clip_accuracy": 0.6428571428571429,
-    "person_accuracy": 0.8235294117647058,
+    "avg_fps": 3.0564193941734894,
+    "clip_accuracy": 0.8571428571428571,
+    "person_accuracy": 1.0,
     "media": {
       "20260723_054550.jpg": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
+            "compliant": false,
             "confidence": 0.873832106590271
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.6992149729921948,
-        "fps": 1.4301753232208927
+        "elapsed_s": 0.7723598679876886,
+        "fps": 1.2947332473467406
       },
       "20260724_054702.jpg": {
         "predicted_persons": 1,
@@ -42,8 +42,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.3310222000000067,
-        "fps": 3.0209454229957378
+        "elapsed_s": 1.408244032994844,
+        "fps": 0.7101041982569943
       },
       "20260824_174509.mp4": {
         "predicted_persons": 1,
@@ -56,12 +56,12 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8359975364435924
+            "confidence": 0.8411084766012763
           }
         ],
         "n_frames": 229,
-        "elapsed_s": 62.69701831997372,
-        "fps": 3.6524862925905084
+        "elapsed_s": 63.29896272800397,
+        "fps": 3.617752805587264
       },
       "20260824_174640.mp4": {
         "predicted_persons": 1,
@@ -78,8 +78,8 @@
           }
         ],
         "n_frames": 201,
-        "elapsed_s": 51.81007387500722,
-        "fps": 3.879554398724007
+        "elapsed_s": 52.771158109011594,
+        "fps": 3.808898784915538
       },
       "20260824_190237.mp4": {
         "predicted_persons": 1,
@@ -92,12 +92,12 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8879067909797566
+            "confidence": 0.8879103402296702
           }
         ],
         "n_frames": 150,
-        "elapsed_s": 42.068486595992,
-        "fps": 3.5656143621361216
+        "elapsed_s": 43.33169854499283,
+        "fps": 3.46166905606642
       },
       "20260824_190302.mp4": {
         "predicted_persons": 1,
@@ -114,21 +114,21 @@
           }
         ],
         "n_frames": 148,
-        "elapsed_s": 41.260719937010435,
-        "fps": 3.5869466220158106
+        "elapsed_s": 42.16574164602207,
+        "fps": 3.5099584217549835
       },
       "20260826_221411.mp4": {
         "predicted_persons": 2,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
         "expected_persons": 2,
         "expected_compliant": 0,
         "expected_non_compliant": 2,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
-            "confidence": 0.8118404756892811
+            "compliant": false,
+            "confidence": 0.8103433571644684
           },
           {
             "compliant": false,
@@ -136,8 +136,8 @@
           }
         ],
         "n_frames": 67,
-        "elapsed_s": 19.065771878988016,
-        "fps": 3.5141509310640227
+        "elapsed_s": 19.456199520995142,
+        "fps": 3.4436324487575516
       },
       "20260826_221430.mp4": {
         "predicted_persons": 2,
@@ -154,12 +154,12 @@
           },
           {
             "compliant": false,
-            "confidence": 0.7620310933966385
+            "confidence": 0.7627914103594693
           }
         ],
         "n_frames": 117,
-        "elapsed_s": 32.93048461902072,
-        "fps": 3.5529389061107395
+        "elapsed_s": 33.65043769899057,
+        "fps": 3.476923570700232
       },
       "20260826_221451.mp4": {
         "predicted_persons": 2,
@@ -176,12 +176,12 @@
           },
           {
             "compliant": true,
-            "confidence": 0.7895445235073566
+            "confidence": 0.7953156871968005
           }
         ],
         "n_frames": 121,
-        "elapsed_s": 33.97919041401474,
-        "fps": 3.561003029374516
+        "elapsed_s": 34.82480593200307,
+        "fps": 3.4745347967267266
       },
       "20260826_221511.mp4": {
         "predicted_persons": 4,
@@ -194,7 +194,7 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8278952782422724
+            "confidence": 0.8282965523739384
           },
           {
             "compliant": false,
@@ -210,48 +210,48 @@
           }
         ],
         "n_frames": 82,
-        "elapsed_s": 23.204472740995698,
-        "fps": 3.5338014750548217
+        "elapsed_s": 23.63340717300889,
+        "fps": 3.4696647588609273
       },
       "20260826_221517.mp4": {
         "predicted_persons": 2,
-        "predicted_compliant": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8622901426016829
+          },
+          {
+            "compliant": false,
+            "confidence": 0.8449977082865578
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 55.13240088097518,
+        "fps": 3.391834874082711
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
         "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
-          {
-            "compliant": true,
-            "confidence": 0.8728688532911887
-          },
           {
             "compliant": false,
-            "confidence": 0.8421503596979639
-          }
-        ],
-        "n_frames": 187,
-        "elapsed_s": 52.34923150599934,
-        "fps": 3.5721632318245087
-      },
-      "IMG-20260119-WA0022.jpg": {
-        "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
-        "expected_persons": 1,
-        "expected_compliant": 0,
-        "expected_non_compliant": 1,
-        "match": false,
-        "tracks": [
-          {
-            "compliant": true,
             "confidence": 0.8507283926010132
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.3804574960086029,
-        "fps": 2.6284145022533294
+        "elapsed_s": 0.435636980982963,
+        "fps": 2.295489234508097
       },
       "test_image.jpg": {
         "predicted_persons": 1,
@@ -268,8 +268,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.2723280390200671,
-        "fps": 3.6720420107982816
+        "elapsed_s": 0.29571106799994595,
+        "fps": 3.381679308669579
       },
       "test_image2.jpg": {
         "predicted_persons": 1,
@@ -286,8 +286,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.2724228840088472,
-        "fps": 3.6707635764091098
+        "elapsed_s": 0.28960357801406644,
+        "fps": 3.4529960121950865
       }
     }
   },
@@ -295,29 +295,29 @@
     "config": "grounding-dino-base + sam-vit-base",
     "dino_model": "IDEA-Research/grounding-dino-base",
     "sam_model": "facebook/sam-vit-base",
-    "load_time_s": 0.9423348660056945,
+    "load_time_s": 1.1406906060001347,
     "peak_vram_gb": 2.803534984588623,
-    "avg_fps": 2.8972752455695274,
-    "clip_accuracy": 0.8571428571428571,
-    "person_accuracy": 0.8823529411764706,
+    "avg_fps": 2.6709753508894103,
+    "clip_accuracy": 1.0,
+    "person_accuracy": 1.0,
     "media": {
       "20260723_054550.jpg": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
+            "compliant": false,
             "confidence": 0.7551930546760559
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.763836073980201,
-        "fps": 1.3091814252620915
+        "elapsed_s": 0.8371720629802439,
+        "fps": 1.1944975760898016
       },
       "20260724_054702.jpg": {
         "predicted_persons": 1,
@@ -334,8 +334,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.37704405101248994,
-        "fps": 2.6522099932744307
+        "elapsed_s": 0.4084305150026921,
+        "fps": 2.4483968833558105
       },
       "20260824_174509.mp4": {
         "predicted_persons": 1,
@@ -352,8 +352,8 @@
           }
         ],
         "n_frames": 229,
-        "elapsed_s": 74.15670179700828,
-        "fps": 3.088055353740646
+        "elapsed_s": 77.35167823100346,
+        "fps": 2.9605046100759855
       },
       "20260824_174640.mp4": {
         "predicted_persons": 1,
@@ -370,8 +370,8 @@
           }
         ],
         "n_frames": 201,
-        "elapsed_s": 58.691691837011604,
-        "fps": 3.4246755155428534
+        "elapsed_s": 60.83369443999254,
+        "fps": 3.3040899759634037
       },
       "20260824_190237.mp4": {
         "predicted_persons": 1,
@@ -388,8 +388,8 @@
           }
         ],
         "n_frames": 150,
-        "elapsed_s": 49.473788568982854,
-        "fps": 3.031908498190922
+        "elapsed_s": 55.98009538699989,
+        "fps": 2.6795238372322263
       },
       "20260824_190302.mp4": {
         "predicted_persons": 1,
@@ -406,8 +406,8 @@
           }
         ],
         "n_frames": 148,
-        "elapsed_s": 41.72388903799583,
-        "fps": 3.5471285973659814
+        "elapsed_s": 47.793091785977595,
+        "fps": 3.096681852322074
       },
       "20260826_221411.mp4": {
         "predicted_persons": 2,
@@ -428,8 +428,8 @@
           }
         ],
         "n_frames": 67,
-        "elapsed_s": 22.259242580999853,
-        "fps": 3.009985616365499
+        "elapsed_s": 25.227425657009007,
+        "fps": 2.655839755943754
       },
       "20260826_221430.mp4": {
         "predicted_persons": 2,
@@ -446,12 +446,12 @@
           },
           {
             "compliant": false,
-            "confidence": 0.5501482416601742
+            "confidence": 0.5498196303844451
           }
         ],
         "n_frames": 117,
-        "elapsed_s": 39.05697200799477,
-        "fps": 2.9956239304995447
+        "elapsed_s": 43.78137112499098,
+        "fps": 2.6723694802974056
       },
       "20260826_221451.mp4": {
         "predicted_persons": 2,
@@ -468,12 +468,12 @@
           },
           {
             "compliant": true,
-            "confidence": 0.488221621265014
+            "confidence": 0.5080616310948417
           }
         ],
         "n_frames": 121,
-        "elapsed_s": 40.135194622998824,
-        "fps": 3.0148103462954907
+        "elapsed_s": 44.764282641990576,
+        "fps": 2.703047895745736
       },
       "20260826_221511.mp4": {
         "predicted_persons": 1,
@@ -490,26 +490,26 @@
           }
         ],
         "n_frames": 82,
-        "elapsed_s": 27.152162654994754,
-        "fps": 3.0200172649936508
+        "elapsed_s": 28.979619205987547,
+        "fps": 2.8295747924478523
       },
       "20260826_221517.mp4": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
-            "confidence": 0.6424800518929489
+            "compliant": false,
+            "confidence": 0.6252772760263738
           }
         ],
         "n_frames": 187,
-        "elapsed_s": 61.708295448013814,
-        "fps": 3.0303867355652083
+        "elapsed_s": 67.08124122500885,
+        "fps": 2.7876645778325835
       },
       "IMG-20260119-WA0022.jpg": {
         "predicted_persons": 1,
@@ -526,8 +526,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.44746033899718896,
-        "fps": 2.234834940323688
+        "elapsed_s": 0.4495904999785125,
+        "fps": 2.2242462864490986
       },
       "test_image.jpg": {
         "predicted_persons": 1,
@@ -544,8 +544,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.32380440598353744,
-        "fps": 3.0882841046049294
+        "elapsed_s": 0.3294397809950169,
+        "fps": 3.035456121843178
       },
       "test_image2.jpg": {
         "predicted_persons": 1,
@@ -562,8 +562,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.3210529389907606,
-        "fps": 3.1147511159484464
+        "elapsed_s": 0.3569183469808195,
+        "fps": 2.8017612668528336
       }
     }
   },
@@ -571,29 +571,29 @@
     "config": "grounding-dino-tiny + sam-vit-large",
     "dino_model": "IDEA-Research/grounding-dino-tiny",
     "sam_model": "facebook/sam-vit-large",
-    "load_time_s": 1.0299361450015567,
+    "load_time_s": 1.3442286829813384,
     "peak_vram_gb": 3.9098315238952637,
-    "avg_fps": 2.129798043540749,
-    "clip_accuracy": 0.6428571428571429,
-    "person_accuracy": 0.8235294117647058,
+    "avg_fps": 2.029612618649971,
+    "clip_accuracy": 0.8571428571428571,
+    "person_accuracy": 1.0,
     "media": {
       "20260723_054550.jpg": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
+            "compliant": false,
             "confidence": 0.873832106590271
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.8535067680059001,
-        "fps": 1.1716368721203712
+        "elapsed_s": 0.8891384509915952,
+        "fps": 1.124684236616658
       },
       "20260724_054702.jpg": {
         "predicted_persons": 1,
@@ -610,8 +610,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.4824475259811152,
-        "fps": 2.072764282429223
+        "elapsed_s": 0.4951560379995499,
+        "fps": 2.0195653960719935
       },
       "20260824_174509.mp4": {
         "predicted_persons": 1,
@@ -624,12 +624,12 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8359975364435924
+            "confidence": 0.8411084766012763
           }
         ],
         "n_frames": 229,
-        "elapsed_s": 98.49438819198986,
-        "fps": 2.325005558221475
+        "elapsed_s": 99.66697996098083,
+        "fps": 2.297651640389349
       },
       "20260824_174640.mp4": {
         "predicted_persons": 1,
@@ -646,8 +646,8 @@
           }
         ],
         "n_frames": 201,
-        "elapsed_s": 78.81583838199731,
-        "fps": 2.5502488348320527
+        "elapsed_s": 79.82137035997584,
+        "fps": 2.5181226417629348
       },
       "20260824_190237.mp4": {
         "predicted_persons": 1,
@@ -660,12 +660,12 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8879067909797566
+            "confidence": 0.8879103402296702
           }
         ],
         "n_frames": 150,
-        "elapsed_s": 67.52308015699964,
-        "fps": 2.2214626413847114
+        "elapsed_s": 67.32099163197563,
+        "fps": 2.228131172220495
       },
       "20260824_190302.mp4": {
         "predicted_persons": 1,
@@ -682,21 +682,21 @@
           }
         ],
         "n_frames": 148,
-        "elapsed_s": 66.02229449898005,
-        "fps": 2.2416670175297586
+        "elapsed_s": 66.23898202498094,
+        "fps": 2.2343338541070006
       },
       "20260826_221411.mp4": {
         "predicted_persons": 2,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
         "expected_persons": 2,
         "expected_compliant": 0,
         "expected_non_compliant": 2,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
-            "confidence": 0.8118404756892811
+            "compliant": false,
+            "confidence": 0.8103433571644684
           },
           {
             "compliant": false,
@@ -704,8 +704,8 @@
           }
         ],
         "n_frames": 67,
-        "elapsed_s": 29.92630881301011,
-        "fps": 2.2388327414062017
+        "elapsed_s": 30.34766710101394,
+        "fps": 2.2077479556167097
       },
       "20260826_221430.mp4": {
         "predicted_persons": 2,
@@ -722,12 +722,12 @@
           },
           {
             "compliant": false,
-            "confidence": 0.7620310933966385
+            "confidence": 0.7627914103594693
           }
         ],
         "n_frames": 117,
-        "elapsed_s": 51.91269457200542,
-        "fps": 2.2537839918464515
+        "elapsed_s": 52.66141489901929,
+        "fps": 2.2217405328807236
       },
       "20260826_221451.mp4": {
         "predicted_persons": 2,
@@ -744,12 +744,12 @@
           },
           {
             "compliant": true,
-            "confidence": 0.7895445235073566
+            "confidence": 0.7953156871968005
           }
         ],
         "n_frames": 121,
-        "elapsed_s": 53.66436629300006,
-        "fps": 2.254755033150986
+        "elapsed_s": 54.50082991999807,
+        "fps": 2.2201496780437338
       },
       "20260826_221511.mp4": {
         "predicted_persons": 4,
@@ -762,7 +762,7 @@
         "tracks": [
           {
             "compliant": false,
-            "confidence": 0.8278952782422724
+            "confidence": 0.8282965523739384
           },
           {
             "compliant": false,
@@ -778,48 +778,48 @@
           }
         ],
         "n_frames": 82,
-        "elapsed_s": 36.86932222801261,
-        "fps": 2.2240712615459466
+        "elapsed_s": 36.94069211601163,
+        "fps": 2.2197743275215407
       },
       "20260826_221517.mp4": {
         "predicted_persons": 2,
-        "predicted_compliant": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8622901426016829
+          },
+          {
+            "compliant": false,
+            "confidence": 0.8449977082865578
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 83.99200372002088,
+        "fps": 2.226402415917427
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
         "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
-          {
-            "compliant": true,
-            "confidence": 0.8728688532911887
-          },
           {
             "compliant": false,
-            "confidence": 0.8421503596979639
-          }
-        ],
-        "n_frames": 187,
-        "elapsed_s": 86.24571151399869,
-        "fps": 2.1682237495327255
-      },
-      "IMG-20260119-WA0022.jpg": {
-        "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
-        "expected_persons": 1,
-        "expected_compliant": 0,
-        "expected_non_compliant": 1,
-        "match": false,
-        "tracks": [
-          {
-            "compliant": true,
             "confidence": 0.8507283926010132
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.5921753049769904,
-        "fps": 1.6886891290390031
+        "elapsed_s": 2.7621179110137746,
+        "fps": 0.3620410251179219
       },
       "test_image.jpg": {
         "predicted_persons": 1,
@@ -836,8 +836,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.45362820898299105,
-        "fps": 2.2044484452189246
+        "elapsed_s": 0.440855401015142,
+        "fps": 2.2683174521562757
       },
       "test_image2.jpg": {
         "predicted_persons": 1,
@@ -854,8 +854,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.45421861301292665,
-        "fps": 2.2015830513126526
+        "elapsed_s": 0.4413229509955272,
+        "fps": 2.2659143326768314
       }
     }
   },
@@ -863,29 +863,29 @@
     "config": "grounding-dino-base + sam-vit-large",
     "dino_model": "IDEA-Research/grounding-dino-base",
     "sam_model": "facebook/sam-vit-large",
-    "load_time_s": 1.1529973860015161,
+    "load_time_s": 1.354163112002425,
     "peak_vram_gb": 4.137203693389893,
-    "avg_fps": 2.023150430548941,
-    "clip_accuracy": 0.8571428571428571,
-    "person_accuracy": 0.8823529411764706,
+    "avg_fps": 1.9635608193528964,
+    "clip_accuracy": 1.0,
+    "person_accuracy": 1.0,
     "media": {
       "20260723_054550.jpg": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
+            "compliant": false,
             "confidence": 0.7551930546760559
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.9027594380022492,
-        "fps": 1.1077148107284684
+        "elapsed_s": 0.9671550430066418,
+        "fps": 1.0339603843570433
       },
       "20260724_054702.jpg": {
         "predicted_persons": 1,
@@ -902,8 +902,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.5366194329981226,
-        "fps": 1.8635180511688596
+        "elapsed_s": 0.5506613759789616,
+        "fps": 1.8159980772615614
       },
       "20260824_174509.mp4": {
         "predicted_persons": 1,
@@ -920,8 +920,8 @@
           }
         ],
         "n_frames": 229,
-        "elapsed_s": 108.34102782901027,
-        "fps": 2.113696026231358
+        "elapsed_s": 110.47048092298792,
+        "fps": 2.07295196043948
       },
       "20260824_174640.mp4": {
         "predicted_persons": 1,
@@ -938,8 +938,8 @@
           }
         ],
         "n_frames": 201,
-        "elapsed_s": 80.42317426999216,
-        "fps": 2.4992796146694496
+        "elapsed_s": 82.5731577439874,
+        "fps": 2.4342050793695837
       },
       "20260824_190237.mp4": {
         "predicted_persons": 1,
@@ -956,8 +956,8 @@
           }
         ],
         "n_frames": 150,
-        "elapsed_s": 73.41263453301508,
-        "fps": 2.043245021162428
+        "elapsed_s": 76.24644794600317,
+        "fps": 1.9673047602981875
       },
       "20260824_190302.mp4": {
         "predicted_persons": 1,
@@ -974,8 +974,8 @@
           }
         ],
         "n_frames": 148,
-        "elapsed_s": 54.43013477700879,
-        "fps": 2.7190820049652897
+        "elapsed_s": 56.222986530017806,
+        "fps": 2.6323752816115853
       },
       "20260826_221411.mp4": {
         "predicted_persons": 2,
@@ -996,8 +996,8 @@
           }
         ],
         "n_frames": 67,
-        "elapsed_s": 33.034842182998545,
-        "fps": 2.0281616491112433
+        "elapsed_s": 33.93823424002039,
+        "fps": 1.9741745998379832
       },
       "20260826_221430.mp4": {
         "predicted_persons": 2,
@@ -1014,12 +1014,12 @@
           },
           {
             "compliant": false,
-            "confidence": 0.5501482416601742
+            "confidence": 0.5498196303844451
           }
         ],
         "n_frames": 117,
-        "elapsed_s": 57.535308605001774,
-        "fps": 2.033533891392541
+        "elapsed_s": 58.96443266500137,
+        "fps": 1.9842470233661034
       },
       "20260826_221451.mp4": {
         "predicted_persons": 2,
@@ -1036,12 +1036,12 @@
           },
           {
             "compliant": true,
-            "confidence": 0.488221621265014
+            "confidence": 0.5080616310948417
           }
         ],
         "n_frames": 121,
-        "elapsed_s": 59.572725067002466,
-        "fps": 2.0311308549996534
+        "elapsed_s": 61.15143173397519,
+        "fps": 1.978694473195359
       },
       "20260826_221511.mp4": {
         "predicted_persons": 1,
@@ -1058,26 +1058,26 @@
           }
         ],
         "n_frames": 82,
-        "elapsed_s": 40.29198376601562,
-        "fps": 2.0351442727712783
+        "elapsed_s": 41.58935852299328,
+        "fps": 1.9716582056601115
       },
       "20260826_221517.mp4": {
         "predicted_persons": 1,
-        "predicted_compliant": 1,
-        "predicted_non_compliant": 0,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
         "expected_persons": 1,
         "expected_compliant": 0,
         "expected_non_compliant": 1,
-        "match": false,
+        "match": true,
         "tracks": [
           {
-            "compliant": true,
-            "confidence": 0.6424800518929489
+            "compliant": false,
+            "confidence": 0.6252772760263738
           }
         ],
         "n_frames": 187,
-        "elapsed_s": 91.61440820101416,
-        "fps": 2.041163651788234
+        "elapsed_s": 94.68956608101144,
+        "fps": 1.9748743999947427
       },
       "IMG-20260119-WA0022.jpg": {
         "predicted_persons": 1,
@@ -1094,8 +1094,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.5943200509937014,
-        "fps": 1.6825950905206764
+        "elapsed_s": 0.6279730719979852,
+        "fps": 1.592424969463035
       },
       "test_image.jpg": {
         "predicted_persons": 1,
@@ -1112,8 +1112,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.4827866340056062,
-        "fps": 2.071308378409639
+        "elapsed_s": 0.4885923480032943,
+        "fps": 2.046695991221822
       },
       "test_image2.jpg": {
         "predicted_persons": 1,
@@ -1130,8 +1130,8 @@
           }
         ],
         "n_frames": 1,
-        "elapsed_s": 0.4867286829976365,
-        "fps": 2.0545327097660606
+        "elapsed_s": 0.4974415920150932,
+        "fps": 2.010286264863953
       }
     }
   }
