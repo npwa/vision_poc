@@ -3,31 +3,291 @@
     "config": "grounding-dino-tiny + sam-vit-base",
     "dino_model": "IDEA-Research/grounding-dino-tiny",
     "sam_model": "facebook/sam-vit-base",
-    "load_time_s": 4.123636285003158,
+    "load_time_s": 0.8210430189792532,
     "peak_vram_gb": 2.575918674468994,
-    "avg_fps": 3.597312639682266,
-    "videos": {
+    "avg_fps": 3.3457857203266004,
+    "clip_accuracy": 0.6428571428571429,
+    "person_accuracy": 0.8235294117647058,
+    "media": {
+      "20260723_054550.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.873832106590271
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.6992149729921948,
+        "fps": 1.4301753232208927
+      },
+      "20260724_054702.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.49437999725341797
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.3310222000000067,
+        "fps": 3.0209454229957378
+      },
       "20260824_174509.mp4": {
-        "verdict": "Person WITHOUT hard hat",
-        "detail": {
-          "confidence": 0.8305088242685253,
-          "agree_frames": 176,
-          "total_person_frames": 215
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8359975364435924
+          }
+        ],
         "n_frames": 229,
-        "elapsed_s": 65.73250775800261,
-        "fps": 3.483816574336012
+        "elapsed_s": 62.69701831997372,
+        "fps": 3.6524862925905084
       },
       "20260824_174640.mp4": {
-        "verdict": "Person WITH hard hat",
-        "detail": {
-          "confidence": 0.8754946239016674,
-          "agree_frames": 108,
-          "total_person_frames": 128
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8840429569190403
+          }
+        ],
         "n_frames": 201,
-        "elapsed_s": 54.166090460988926,
-        "fps": 3.71080870502852
+        "elapsed_s": 51.81007387500722,
+        "fps": 3.879554398724007
+      },
+      "20260824_190237.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8879067909797566
+          }
+        ],
+        "n_frames": 150,
+        "elapsed_s": 42.068486595992,
+        "fps": 3.5656143621361216
+      },
+      "20260824_190302.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8895319392604213
+          }
+        ],
+        "n_frames": 148,
+        "elapsed_s": 41.260719937010435,
+        "fps": 3.5869466220158106
+      },
+      "20260826_221411.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 0,
+        "expected_non_compliant": 2,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8118404756892811
+          },
+          {
+            "compliant": false,
+            "confidence": 0.7897217869758606
+          }
+        ],
+        "n_frames": 67,
+        "elapsed_s": 19.065771878988016,
+        "fps": 3.5141509310640227
+      },
+      "20260826_221430.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6833663968478932
+          },
+          {
+            "compliant": false,
+            "confidence": 0.7620310933966385
+          }
+        ],
+        "n_frames": 117,
+        "elapsed_s": 32.93048461902072,
+        "fps": 3.5529389061107395
+      },
+      "20260826_221451.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.7860243022441864
+          },
+          {
+            "compliant": true,
+            "confidence": 0.7895445235073566
+          }
+        ],
+        "n_frames": 121,
+        "elapsed_s": 33.97919041401474,
+        "fps": 3.561003029374516
+      },
+      "20260826_221511.mp4": {
+        "predicted_persons": 4,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 4,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8278952782422724
+          },
+          {
+            "compliant": false,
+            "confidence": 0.3815876160349165
+          },
+          {
+            "compliant": false,
+            "confidence": 0.4071741501490275
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5307140573859215
+          }
+        ],
+        "n_frames": 82,
+        "elapsed_s": 23.204472740995698,
+        "fps": 3.5338014750548217
+      },
+      "20260826_221517.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8728688532911887
+          },
+          {
+            "compliant": false,
+            "confidence": 0.8421503596979639
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 52.34923150599934,
+        "fps": 3.5721632318245087
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8507283926010132
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.3804574960086029,
+        "fps": 2.6284145022533294
+      },
+      "test_image.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.9041904807090759
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.2723280390200671,
+        "fps": 3.6720420107982816
+      },
+      "test_image2.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.9128878116607666
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.2724228840088472,
+        "fps": 3.6707635764091098
       }
     }
   },
@@ -35,31 +295,275 @@
     "config": "grounding-dino-base + sam-vit-base",
     "dino_model": "IDEA-Research/grounding-dino-base",
     "sam_model": "facebook/sam-vit-base",
-    "load_time_s": 22.88051952100068,
-    "peak_vram_gb": 2.802680492401123,
-    "avg_fps": 3.2482929935383162,
-    "videos": {
+    "load_time_s": 0.9423348660056945,
+    "peak_vram_gb": 2.803534984588623,
+    "avg_fps": 2.8972752455695274,
+    "clip_accuracy": 0.8571428571428571,
+    "person_accuracy": 0.8823529411764706,
+    "media": {
+      "20260723_054550.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.7551930546760559
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.763836073980201,
+        "fps": 1.3091814252620915
+      },
+      "20260724_054702.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8010439276695251
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.37704405101248994,
+        "fps": 2.6522099932744307
+      },
       "20260824_174509.mp4": {
-        "verdict": "Person WITHOUT hard hat",
-        "detail": {
-          "confidence": 0.61085437817706,
-          "agree_frames": 216,
-          "total_person_frames": 216
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.61085437817706
+          }
+        ],
         "n_frames": 229,
-        "elapsed_s": 74.06689104399993,
-        "fps": 3.0917998146291983
+        "elapsed_s": 74.15670179700828,
+        "fps": 3.088055353740646
       },
       "20260824_174640.mp4": {
-        "verdict": "Person WITH hard hat",
-        "detail": {
-          "confidence": 0.6078441360286463,
-          "agree_frames": 107,
-          "total_person_frames": 125
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6078441360286463
+          }
+        ],
         "n_frames": 201,
-        "elapsed_s": 59.03454426200187,
-        "fps": 3.404786172447434
+        "elapsed_s": 58.691691837011604,
+        "fps": 3.4246755155428534
+      },
+      "20260824_190237.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5714938684304556
+          }
+        ],
+        "n_frames": 150,
+        "elapsed_s": 49.473788568982854,
+        "fps": 3.031908498190922
+      },
+      "20260824_190302.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.5511124905730996
+          }
+        ],
+        "n_frames": 148,
+        "elapsed_s": 41.72388903799583,
+        "fps": 3.5471285973659814
+      },
+      "20260826_221411.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
+        "expected_persons": 2,
+        "expected_compliant": 0,
+        "expected_non_compliant": 2,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5783284911468848
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5768242522851744
+          }
+        ],
+        "n_frames": 67,
+        "elapsed_s": 22.259242580999853,
+        "fps": 3.009985616365499
+      },
+      "20260826_221430.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.46527126282453535
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5501482416601742
+          }
+        ],
+        "n_frames": 117,
+        "elapsed_s": 39.05697200799477,
+        "fps": 2.9956239304995447
+      },
+      "20260826_221451.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5614577610630634
+          },
+          {
+            "compliant": true,
+            "confidence": 0.488221621265014
+          }
+        ],
+        "n_frames": 121,
+        "elapsed_s": 40.135194622998824,
+        "fps": 3.0148103462954907
+      },
+      "20260826_221511.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6223770005673896
+          }
+        ],
+        "n_frames": 82,
+        "elapsed_s": 27.152162654994754,
+        "fps": 3.0200172649936508
+      },
+      "20260826_221517.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6424800518929489
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 61.708295448013814,
+        "fps": 3.0303867355652083
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6400164365768433
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.44746033899718896,
+        "fps": 2.234834940323688
+      },
+      "test_image.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6837558746337891
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.32380440598353744,
+        "fps": 3.0882841046049294
+      },
+      "test_image2.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6701509356498718
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.3210529389907606,
+        "fps": 3.1147511159484464
       }
     }
   },
@@ -67,31 +571,291 @@
     "config": "grounding-dino-tiny + sam-vit-large",
     "dino_model": "IDEA-Research/grounding-dino-tiny",
     "sam_model": "facebook/sam-vit-large",
-    "load_time_s": 26.251305432000663,
-    "peak_vram_gb": 3.9080004692077637,
-    "avg_fps": 2.4245595751831717,
-    "videos": {
+    "load_time_s": 1.0299361450015567,
+    "peak_vram_gb": 3.9098315238952637,
+    "avg_fps": 2.129798043540749,
+    "clip_accuracy": 0.6428571428571429,
+    "person_accuracy": 0.8235294117647058,
+    "media": {
+      "20260723_054550.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.873832106590271
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.8535067680059001,
+        "fps": 1.1716368721203712
+      },
+      "20260724_054702.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.49437999725341797
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.4824475259811152,
+        "fps": 2.072764282429223
+      },
       "20260824_174509.mp4": {
-        "verdict": "Person WITHOUT hard hat",
-        "detail": {
-          "confidence": 0.8305088242685253,
-          "agree_frames": 176,
-          "total_person_frames": 215
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8359975364435924
+          }
+        ],
         "n_frames": 229,
-        "elapsed_s": 98.77487436099909,
-        "fps": 2.3184033539041367
+        "elapsed_s": 98.49438819198986,
+        "fps": 2.325005558221475
       },
       "20260824_174640.mp4": {
-        "verdict": "Person WITH hard hat",
-        "detail": {
-          "confidence": 0.8754946239016674,
-          "agree_frames": 108,
-          "total_person_frames": 128
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8840429569190403
+          }
+        ],
         "n_frames": 201,
-        "elapsed_s": 79.42416935200163,
-        "fps": 2.5307157964622067
+        "elapsed_s": 78.81583838199731,
+        "fps": 2.5502488348320527
+      },
+      "20260824_190237.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8879067909797566
+          }
+        ],
+        "n_frames": 150,
+        "elapsed_s": 67.52308015699964,
+        "fps": 2.2214626413847114
+      },
+      "20260824_190302.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8895319392604213
+          }
+        ],
+        "n_frames": 148,
+        "elapsed_s": 66.02229449898005,
+        "fps": 2.2416670175297586
+      },
+      "20260826_221411.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 0,
+        "expected_non_compliant": 2,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8118404756892811
+          },
+          {
+            "compliant": false,
+            "confidence": 0.7897217869758606
+          }
+        ],
+        "n_frames": 67,
+        "elapsed_s": 29.92630881301011,
+        "fps": 2.2388327414062017
+      },
+      "20260826_221430.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6833663968478932
+          },
+          {
+            "compliant": false,
+            "confidence": 0.7620310933966385
+          }
+        ],
+        "n_frames": 117,
+        "elapsed_s": 51.91269457200542,
+        "fps": 2.2537839918464515
+      },
+      "20260826_221451.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.7860243022441864
+          },
+          {
+            "compliant": true,
+            "confidence": 0.7895445235073566
+          }
+        ],
+        "n_frames": 121,
+        "elapsed_s": 53.66436629300006,
+        "fps": 2.254755033150986
+      },
+      "20260826_221511.mp4": {
+        "predicted_persons": 4,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 4,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8278952782422724
+          },
+          {
+            "compliant": false,
+            "confidence": 0.3815876160349165
+          },
+          {
+            "compliant": false,
+            "confidence": 0.4071741501490275
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5307140573859215
+          }
+        ],
+        "n_frames": 82,
+        "elapsed_s": 36.86932222801261,
+        "fps": 2.2240712615459466
+      },
+      "20260826_221517.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8728688532911887
+          },
+          {
+            "compliant": false,
+            "confidence": 0.8421503596979639
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 86.24571151399869,
+        "fps": 2.1682237495327255
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.8507283926010132
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.5921753049769904,
+        "fps": 1.6886891290390031
+      },
+      "test_image.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.9041904807090759
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.45362820898299105,
+        "fps": 2.2044484452189246
+      },
+      "test_image2.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.9128878116607666
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.45421861301292665,
+        "fps": 2.2015830513126526
       }
     }
   },
@@ -99,31 +863,275 @@
     "config": "grounding-dino-base + sam-vit-large",
     "dino_model": "IDEA-Research/grounding-dino-base",
     "sam_model": "facebook/sam-vit-large",
-    "load_time_s": 4.395149922987912,
-    "peak_vram_gb": 4.137569904327393,
-    "avg_fps": 2.29212740669907,
-    "videos": {
+    "load_time_s": 1.1529973860015161,
+    "peak_vram_gb": 4.137203693389893,
+    "avg_fps": 2.023150430548941,
+    "clip_accuracy": 0.8571428571428571,
+    "person_accuracy": 0.8823529411764706,
+    "media": {
+      "20260723_054550.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.7551930546760559
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.9027594380022492,
+        "fps": 1.1077148107284684
+      },
+      "20260724_054702.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.8010439276695251
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.5366194329981226,
+        "fps": 1.8635180511688596
+      },
       "20260824_174509.mp4": {
-        "verdict": "Person WITHOUT hard hat",
-        "detail": {
-          "confidence": 0.61085437817706,
-          "agree_frames": 216,
-          "total_person_frames": 216
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.61085437817706
+          }
+        ],
         "n_frames": 229,
-        "elapsed_s": 109.47022511799878,
-        "fps": 2.091893021624457
+        "elapsed_s": 108.34102782901027,
+        "fps": 2.113696026231358
       },
       "20260824_174640.mp4": {
-        "verdict": "Person WITH hard hat",
-        "detail": {
-          "confidence": 0.6078441360286463,
-          "agree_frames": 107,
-          "total_person_frames": 125
-        },
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6078441360286463
+          }
+        ],
         "n_frames": 201,
-        "elapsed_s": 80.646397591001,
-        "fps": 2.492361791773682
+        "elapsed_s": 80.42317426999216,
+        "fps": 2.4992796146694496
+      },
+      "20260824_190237.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5714938684304556
+          }
+        ],
+        "n_frames": 150,
+        "elapsed_s": 73.41263453301508,
+        "fps": 2.043245021162428
+      },
+      "20260824_190302.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.5511124905730996
+          }
+        ],
+        "n_frames": 148,
+        "elapsed_s": 54.43013477700879,
+        "fps": 2.7190820049652897
+      },
+      "20260826_221411.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 2,
+        "expected_persons": 2,
+        "expected_compliant": 0,
+        "expected_non_compliant": 2,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5783284911468848
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5768242522851744
+          }
+        ],
+        "n_frames": 67,
+        "elapsed_s": 33.034842182998545,
+        "fps": 2.0281616491112433
+      },
+      "20260826_221430.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.46527126282453535
+          },
+          {
+            "compliant": false,
+            "confidence": 0.5501482416601742
+          }
+        ],
+        "n_frames": 117,
+        "elapsed_s": 57.535308605001774,
+        "fps": 2.033533891392541
+      },
+      "20260826_221451.mp4": {
+        "predicted_persons": 2,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 1,
+        "expected_persons": 2,
+        "expected_compliant": 1,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.5614577610630634
+          },
+          {
+            "compliant": true,
+            "confidence": 0.488221621265014
+          }
+        ],
+        "n_frames": 121,
+        "elapsed_s": 59.572725067002466,
+        "fps": 2.0311308549996534
+      },
+      "20260826_221511.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6223770005673896
+          }
+        ],
+        "n_frames": 82,
+        "elapsed_s": 40.29198376601562,
+        "fps": 2.0351442727712783
+      },
+      "20260826_221517.mp4": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": false,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6424800518929489
+          }
+        ],
+        "n_frames": 187,
+        "elapsed_s": 91.61440820101416,
+        "fps": 2.041163651788234
+      },
+      "IMG-20260119-WA0022.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6400164365768433
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.5943200509937014,
+        "fps": 1.6825950905206764
+      },
+      "test_image.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 1,
+        "predicted_non_compliant": 0,
+        "expected_persons": 1,
+        "expected_compliant": 1,
+        "expected_non_compliant": 0,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": true,
+            "confidence": 0.6837558746337891
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.4827866340056062,
+        "fps": 2.071308378409639
+      },
+      "test_image2.jpg": {
+        "predicted_persons": 1,
+        "predicted_compliant": 0,
+        "predicted_non_compliant": 1,
+        "expected_persons": 1,
+        "expected_compliant": 0,
+        "expected_non_compliant": 1,
+        "match": true,
+        "tracks": [
+          {
+            "compliant": false,
+            "confidence": 0.6701509356498718
+          }
+        ],
+        "n_frames": 1,
+        "elapsed_s": 0.4867286829976365,
+        "fps": 2.0545327097660606
       }
     }
   }

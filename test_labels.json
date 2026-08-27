@@ -1,0 +1,58 @@
+{
+  "test_image.jpg": {
+    "persons": 1, "compliant": 1, "non_compliant": 0,
+    "note": "person with hard hat"
+  },
+  "test_image2.jpg": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person without hard hat"
+  },
+  "20260824_174509.mp4": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person without hard hat"
+  },
+  "20260824_174640.mp4": {
+    "persons": 1, "compliant": 1, "non_compliant": 0,
+    "note": "person with hard hat"
+  },
+  "20260824_190302.mp4": {
+    "persons": 1, "compliant": 1, "non_compliant": 0,
+    "note": "person with hard hat, outdoor driveway/worksite scene, different subject"
+  },
+  "20260824_190237.mp4": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person without hard hat, outdoor driveway/worksite scene, different subject"
+  },
+  "20260826_221411.mp4": {
+    "persons": 2, "compliant": 0, "non_compliant": 2,
+    "note": "two persons, neither wearing a hard hat, indoor colored/low light"
+  },
+  "20260826_221430.mp4": {
+    "persons": 2, "compliant": 1, "non_compliant": 1,
+    "note": "two persons, only one wearing a hard hat, indoor colored/low light"
+  },
+  "20260826_221451.mp4": {
+    "persons": 2, "compliant": 1, "non_compliant": 1,
+    "note": "two persons, only one wearing a hard hat, indoor colored/low light"
+  },
+  "20260826_221511.mp4": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person handling but not wearing a hard hat -- hard negative for the geometric head_has_hat() rule (hat present in frame, not on head)"
+  },
+  "20260826_221517.mp4": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person holding but not wearing a hard hat -- hard negative for the geometric head_has_hat() rule (hat present in frame, not on head)"
+  },
+  "IMG-20260119-WA0022.jpg": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person without hard hat, harsh backlight/sun flare -- hard negative for lighting"
+  },
+  "20260724_054702.jpg": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person wearing a wide-brim outdoor hat (not a hard hat), bright outdoor mountain scene with lens flare -- hard negative for headwear class confusion"
+  },
+  "20260723_054550.jpg": {
+    "persons": 1, "compliant": 0, "non_compliant": 1,
+    "note": "person wearing a wide-brim outdoor hat (not a hard hat), outdoor forest scene -- hard negative for headwear class confusion"
+  }
+}

@@ -42,6 +42,8 @@ from transformers import (
     SamProcessor,
 )
 
+from tracker import GreedyIOUTracker
+
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
@@ -51,7 +53,7 @@ def ensure_test_media():
     subprocess.run(["bash", script], check=True)
 
 
-def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
+def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.05):
     """
     Geometric compliance check: is a 'hard hat' box positioned over this
     person's head region? Used instead of asking the detector to understand
@@ -59,6 +61,13 @@ def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
     Grounding DINO handles unreliably (it grounds on token correlation, not
     logical negation) — you'll get garbled or duplicate phrases like
     "person person" if you try to prompt for the compound concept directly.
+
+    x_margin is deliberately tight: an earlier margin of 0.15 was found (via
+    test_ppe_models.py's ground-truth eval) to also accept a hard hat held
+    out to the side at head height -- not worn -- because the lateral
+    tolerance meant for a slightly off-center worn hat was generous enough
+    to also cover an arm's-length held hat. 0.05 still tolerates normal
+    detection jitter for a worn hat but no longer reaches an extended arm.
     """
     px0, py0, px1, py1 = person_box
     head_y1 = py0 + head_fraction * (py1 - py0)
@@ -124,20 +133,22 @@ def segment(frame_pil, boxes, sam_processor, sam_model):
     return best_masks
 
 
-def draw_overlay(frame_bgr, boxes, labels, scores, masks):
+def draw_overlay(frame_bgr, boxes, labels, scores, masks, track_ids=None):
     overlay = frame_bgr.copy()
     boxes_list = boxes.tolist()
     hat_boxes = [b for b, l in zip(boxes_list, labels) if "hat" in l.lower()]
 
     mask_iter = masks if masks else [None] * len(boxes)
-    for box, label, score, mask in zip(boxes, labels, scores, mask_iter):
+    track_id_iter = track_ids if track_ids is not None else [None] * len(boxes)
+    for box, label, score, mask, tid in zip(boxes, labels, scores, mask_iter, track_id_iter):
         x0, y0, x1, y1 = box.astype(int)
         l = label.lower()
 
         if "person" in l:
             compliant = head_has_hat(box.tolist(), hat_boxes)
             color = (0, 255, 0) if compliant else (0, 0, 255)  # BGR: green/red
-            text = f"person {'OK' if compliant else 'NO HARD HAT'} {score:.2f}"
+            id_prefix = f"#{tid} " if tid is not None else ""
+            text = f"{id_prefix}person {'OK' if compliant else 'NO HARD HAT'} {score:.2f}"
         elif "hat" in l:
             color = (0, 165, 255)  # orange
             text = f"{label} {score:.2f}"
@@ -197,6 +208,7 @@ def main():
     frame_idx = 0
     last_boxes = np.empty((0, 4))
     last_labels, last_scores, last_masks = [], np.empty((0,)), []
+    tracker = GreedyIOUTracker()
 
     while True:
         ret, frame_bgr = cap.read()
@@ -219,7 +231,17 @@ def main():
                     for label, score, box in zip(labels, scores, boxes):
                         print(f"[frame {frame_idx}] {label!r}  score={score:.2f}  box={box.tolist()}")
 
-        annotated = draw_overlay(frame_bgr, last_boxes, last_labels, last_scores, last_masks)
+        # Update the tracker every frame (even ones reusing a stale
+        # detection) so person identity stays continuous across
+        # --every-n-frames skips instead of resetting whenever detection
+        # re-runs.
+        boxes_list = last_boxes.tolist()
+        person_indices = [i for i, l in enumerate(last_labels) if "person" in l.lower()]
+        person_track_ids = tracker.update([boxes_list[i] for i in person_indices])
+        track_id_by_index = dict(zip(person_indices, person_track_ids))
+        track_ids = [track_id_by_index.get(i) for i in range(len(boxes_list))]
+
+        annotated = draw_overlay(frame_bgr, last_boxes, last_labels, last_scores, last_masks, track_ids)
         writer.write(annotated)
 
         frame_idx += 1

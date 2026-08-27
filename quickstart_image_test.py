@@ -41,13 +41,20 @@ def ensure_test_media():
     subprocess.run(["bash", script], check=True)
 
 
-def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
+def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.05):
     """
     Geometric compliance check: is a 'hard hat' box positioned over this
     person's head region? Used instead of asking the detector to understand
     negated/compound prompts like "person without hard hat" directly, which
     Grounding DINO handles unreliably (it grounds on token correlation, not
     logical negation).
+
+    x_margin is deliberately tight: an earlier margin of 0.15 was found (via
+    test_ppe_models.py's ground-truth eval) to also accept a hard hat held
+    out to the side at head height -- not worn -- because the lateral
+    tolerance meant for a slightly off-center worn hat was generous enough
+    to also cover an arm's-length held hat. 0.05 still tolerates normal
+    detection jitter for a worn hat but no longer reaches an extended arm.
     """
     px0, py0, px1, py1 = person_box
     head_y1 = py0 + head_fraction * (py1 - py0)
