@@ -1,8 +1,19 @@
-# Zero-shot industrial anomaly/PPE detection with a reasoning layer
+# Zero-Shot PPE Compliance Detection
 
-Step 1 (zero-shot detection) + Step 2 (segmentation).  Detects things like
-"person without hard hat" using text prompts alone — no training, no labeled
-dataset — then segments them with SAM. Runs comfortably on an RTX 3080 10GB.
+A small computer-vision proof of concept: detect PPE compliance ("person
+wearing a hard hat" vs. "person without one") in images and video using
+**zero-shot, open-vocabulary object detection** (Grounding DINO) plus
+**prompt-free segmentation** (SAM) — no training run, no labeled dataset,
+just text prompts against off-the-shelf foundation models. Runs comfortably
+on a single consumer GPU (developed and benchmarked on an RTX 3080 10GB —
+see `hardware.md`).
+
+Included:
+- `quickstart_image_test.py` — single-image sanity check.
+- `ppe_zero_shot_pipeline.py` — full video pipeline with box + mask overlay.
+- `test_ppe_models.py` — a benchmark harness comparing all 4 model
+  combinations below on accuracy, confidence, VRAM, and throughput (see
+  `RESULTS.md`).
 
 ## Models
 
@@ -40,10 +51,12 @@ pip install -r requirements.txt
 
 ## Step 1: sanity-check on a single image
 
-Two self-filmed sample stills are included so you can run this immediately
-without sourcing your own photo: `test_image.jpg` (hard hat on) and
-`test_image2.jpg` (no hard hat) — both frames grabbed from this repo's own
-test videos, so there's no third-party image-licensing question. Run:
+Two self-filmed sample stills — `test_image.jpg` (hard hat on) and
+`test_image2.jpg` (no hard hat) — are fetched automatically the first time
+you run either script (via `fetch_test_media.sh`), so you can run this
+immediately without sourcing your own photo. There's no third-party
+image-licensing question since both are frames from this repo's own test
+videos. Run:
 
 ```bash
 python quickstart_image_test.py --image test_image.jpg \
@@ -62,19 +75,22 @@ by periods, each phrase being a separate thing to look for — keep phrases
 to simple, literal visual objects (see "Why the prompt is..." below for why
 compound/negated phrases don't work well here).
 
-## Step 2: full pipeline on your test video
+## Step 2: full pipeline on a video
 
-Once the image test looks right, film your with/without-helmet clips (a
-phone video transferred to the desktop works fine — doesn't need to be from
-a connected webcam) and run:
+Once the image test looks right, try it on the bundled sample clips (also
+fetched automatically via `fetch_test_media.sh`):
 
 ```bash
 python ppe_zero_shot_pipeline.py \
-    --video worker_test.mp4 \
+    --video 20260824_174640.mp4 \
     --output annotated.mp4 \
     --prompt "person. hard hat." \
     --every-n-frames 3
 ```
+
+Or film your own with/without-hard-hat clips (a phone video transferred to
+the desktop works fine — doesn't need to be from a connected webcam) and
+point `--video` at those instead.
 
 `--every-n-frames 3` runs detection on every 3rd frame and reuses the last
 result in between — much faster for a first pass, and fine for a demo video.
@@ -89,6 +105,18 @@ Green boxes = compliant ("person OK"), red boxes = "person NO HARD HAT",
 orange boxes = the raw hard-hat detections themselves. Compliance is
 computed geometrically, not from the label text — see below.
 
+## Model comparison / benchmark suite
+
+```bash
+python test_ppe_models.py
+```
+
+Runs all 4 model combinations from the table above (2 Grounding DINO
+variants × 2 SAM variants) against both bundled sample videos, and reports:
+per-video compliance verdict + confidence, plus peak VRAM and throughput
+(fps) for each combo. Full write-up and results table in `RESULTS.md`;
+target-hardware specs it's checked against are in `hardware.md`.
+
 ## Why the prompt is "person. hard hat." not "person without hard hat."
 
 Grounding DINO grounds phrases to image regions via token-level correlation,
@@ -101,9 +129,9 @@ then determine compliance themselves with a small geometric rule
 (`head_has_hat()`): is a detected hard hat positioned over a detected
 person's head region? Green box + "OK" if yes, red box + "NO HARD HAT" if
 no. This is a cleaner and more reliable pattern generally for compliance-
-style detection tasks — it's a real, well-known limitation of
-open-vocabulary grounding models, and building a reasoning layer around it
-rather than fighting the prompt is the right instinct.
+style detection tasks — negation is a real, well-known limitation of
+open-vocabulary grounding models, so it's more robust to work around it with
+a small geometric rule than to keep fighting the prompt.
 
 ## Troubleshooting
 
@@ -126,3 +154,7 @@ rather than fighting the prompt is the right instinct.
   ```bash
   export HF_HUB_OFFLINE=1
   ```
+
+## License
+
+MIT — see `LICENSE`.

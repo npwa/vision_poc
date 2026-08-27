@@ -28,6 +28,9 @@ setup and tune --prompt / --box-threshold before processing full video.
 """
 
 import argparse
+import os
+import subprocess
+
 import cv2
 import torch
 import numpy as np
@@ -40,6 +43,12 @@ from transformers import (
 )
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+
+def ensure_test_media():
+    """Fetch the bundled sample images/videos via fetch_test_media.sh if missing."""
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fetch_test_media.sh")
+    subprocess.run(["bash", script], check=True)
 
 
 def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
@@ -166,6 +175,8 @@ def main():
     parser.add_argument("--sam-model", default="facebook/sam-vit-base")
     parser.add_argument("--verbose", action="store_true", help="Print each frame's detections to the console")
     args = parser.parse_args()
+
+    ensure_test_media()
 
     dino_processor, dino_model, sam_processor, sam_model = load_models(
         args.dino_model, args.sam_model

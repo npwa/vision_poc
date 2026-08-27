@@ -20,6 +20,9 @@ periods. Each phrase is a separate thing to detect.
 """
 
 import argparse
+import os
+import subprocess
+
 import torch
 from PIL import Image, ImageDraw
 from transformers import (
@@ -30,6 +33,12 @@ from transformers import (
 )
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+
+def ensure_test_media():
+    """Fetch the bundled sample images/videos via fetch_test_media.sh if missing."""
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fetch_test_media.sh")
+    subprocess.run(["bash", script], check=True)
 
 
 def head_has_hat(person_box, hat_boxes, head_fraction=0.35, x_margin=0.15):
@@ -64,6 +73,8 @@ def main():
     parser.add_argument("--text-threshold", type=float, default=0.25)
     parser.add_argument("--output", default="annotated_test.png")
     args = parser.parse_args()
+
+    ensure_test_media()
 
     print(f"Device: {DEVICE}")
     if DEVICE == "cpu":
